@@ -26,6 +26,8 @@
 - [proxy.txt](src/data/proxy.txt) : chứa danh sách proxy, proxy ở mỗi dòng sẽ ứng với tài khoản ở dòng đó trong file users.txt phía trên, để trống nếu không dùng proxy
 - [token.json](src/data/token.json) : chứa danh sách token được tạo ra từ `query_id`. Có thể copy token từ các tool khác qua file này (miễn cùng format) để chạy.
 
+> Định dạng proxy: http://user:pass@ip:port
+
 > Lưu ý: Nếu nhận được thông báo đăng nhập thất bại, hãy lấy mới lại `query_id`
 
 
