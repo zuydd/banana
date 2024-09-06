@@ -1,23 +1,25 @@
 ![Banana banner](https://raw.githubusercontent.com/zuydd/image/main/banana.webp)
+
 # Tool Auto Banana NodeJS by ZuyDD
 
 **Tool phát triển và chia sẻ miễn phí bởi ZuyDD**
 
 <a href="https://www.facebook.com/zuy.dd"><img src="https://raw.githubusercontent.com/zuydd/image/main/facebook.svg" alt="Facebook"></a>
 <a href="https://t.me/zuydd"><img src="https://raw.githubusercontent.com/zuydd/image/main/telegram.svg" alt="Telegram"></a>
+
 > [!WARNING]
 > Mọi hành vi buôn bán tool dưới bất cứ hình thức nào đều không được cho phép!
 
-
 ## 🛠️ Hướng dẫn cài đặt
+
 > Yêu cầu đã cài đặt NodeJS
 
 - Bước 1: Tải về phiên bản mới nhất của tool [tại đây ⬇️](https://github.com/zuydd/banana/archive/refs/heads/main.zip)
 - Bước 2: Giải nén tool
 - Bước 3: Tại thư mục tool vừa giải nén, chạy lệnh `npm install` để cài đặt các thư viện bổ trợ
 
-
 ## 💾 Cách thêm dữ liệu tài khoản
+
 > Tool sử dụng `query_id` làm dữ liệu đầu vào cho mỗi tài khoản
 
 > Tất cả dữ liệu mà bạn cần nhập đều nằm ở các file trong thư mục 📁 `src / data`
@@ -30,18 +32,18 @@
 
 > Lưu ý: Nếu nhận được thông báo đăng nhập thất bại, hãy lấy mới lại `query_id`
 
+## >\_ Các lệnh và chức năng tương ứng
 
-## >_ Các lệnh và chức năng tương ứng
-| Lệnh | Chức năng |
-|----------|----------|
-| `npm run start` | Dùng để chạy claim, làm nhiệm vụ, harvest,.... tóm lại game có gì là nó làm cái đó |
-| `npm run summary` | Dùng để xem thống kê chuối trong các tài khoản |
-| `npm run sell` | Dùng để bán chuối hàng loạt |
+| Lệnh              | Chức năng                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `npm run start`   | Dùng để chạy claim, làm nhiệm vụ, harvest,.... tóm lại game có gì là nó làm cái đó |
+| `npm run summary` | Dùng để xem thống kê chuối trong các tài khoản                                     |
+| `npm run sell`    | Dùng để bán chuối hàng loạt                                                        |
 
 > Các lệnh trên chạy hoàn toàn độc lập với nhau
 
-
 ## 🕹️ Các tính năng có trong tool
+
 - Đa luồng, đếm ngược thời gian claim chuối riêng từng acc, tối ưu tối đa số chuối nhận được
 - Tự động nhận diện proxy
 - Làm nhiệm vụ và claim lượt harvest (mỗi 3 nhiệm vụ)
@@ -57,10 +59,15 @@
 - Tự động chuyển đổi định dạng query_id, encode hay decode vứt vô chạy láng hết, chứ nhìn mấy ông lấy cái query_id khổ cực quá 🤣
 - Mặc định ở vòng lặp đầu tiên mỗi tài khoản sẽ chạy cách nhau 6s để tránh spam request, có thể tìm biến `DELAY_ACC = 6` để điều chỉnh
 
-
 ## 🔄 Lịch sử cập nhật
-> Phiên bản mới nhất: `v0.0.3`
 
+> Phiên bản mới nhất: `v0.0.4`
+
+<details>
+<summary>v0.0.4 - 📅 06/09/2024</summary>
+  
+- Thêm danh sách các task bỏ qua không làm
+</details>
 <details>
 <summary>v0.0.3 - 📅 20/08/2024</summary>
   
@@ -74,6 +81,7 @@
 </details>
 
 ## 🎁 Donate
+
 🌟 Kêu gọi ủng hộ 🌟
 
 Chúng tôi rất vui được chia sẻ các mã script và tài nguyên mã nguồn miễn phí đến cộng đồng làm airdrop. Nếu bạn thấy các công cụ và tài liệu của chúng tôi hữu ích và muốn ủng hộ chúng tôi tiếp tục phát triển và duy trì các dự án này, bạn có thể đóng góp hỗ trợ qua hình thức donate.
