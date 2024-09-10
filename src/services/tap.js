@@ -3,6 +3,7 @@ import colors from "colors";
 import dayjs from "dayjs";
 import delayHelper from "../helpers/delay.js";
 import generatorHelper from "../helpers/generator.js";
+import adsClass from "./ads.js";
 import lotteryService from "./lottery.js";
 
 class TapService {
@@ -48,6 +49,10 @@ class TapService {
     const totalTap = maxTapCount - todayTapCount;
     let count = 0;
     let claimSpeedUp = 0;
+    const ads = await adsClass.viewAds(user, 1);
+    if (ads?.speedup) {
+      claimSpeedUp = ads?.speedup;
+    }
     if (todayTapCount < maxTapCount) {
       user.log.log(colors.yellow(`Bắt đầu tap......`));
       while (todayTapCount < maxTapCount && count < 100) {
@@ -64,6 +69,7 @@ class TapService {
           claimSpeedUp
         )} speedup`
       );
+      await adsClass.viewAds(user, 0);
     } else {
       user.log.log(colors.magenta(`Đã tap hết số lượt của hôm nay`));
     }

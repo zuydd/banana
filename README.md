@@ -61,8 +61,13 @@
 
 ## 🔄 Lịch sử cập nhật
 
-> Phiên bản mới nhất: `v0.0.4`
+> Phiên bản mới nhất: `v0.0.5`
 
+<details>
+<summary>v0.0.5 - 📅 11/09/2024</summary>
+  
+- Thêm chức năng xem quảng cáo nhận thưởng sau khi tap xong và trước khi speedup
+</details>
 <details>
 <summary>v0.0.4 - 📅 06/09/2024</summary>
   
