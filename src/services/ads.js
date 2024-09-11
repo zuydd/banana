@@ -3,6 +3,20 @@ import colors from "colors";
 class AdsClass {
   constructor() {}
 
+  async getInfoAds(user) {
+    try {
+      const { data } = await user.http.get("user_ads_info");
+      if (data.code === 0) {
+        return data.data;
+      } else {
+        throw new Error(`Lấy thông tin quảng cáo thất bại: ${data.msg}`);
+      }
+    } catch (error) {
+      user.log.logError(error.message);
+      return null;
+    }
+  }
+
   async viewAds(user, type) {
     const body = { type };
     try {

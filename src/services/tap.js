@@ -49,10 +49,14 @@ class TapService {
     const totalTap = maxTapCount - todayTapCount;
     let count = 0;
     let claimSpeedUp = 0;
-    const ads = await adsClass.viewAds(user, 1);
-    if (ads?.speedup) {
-      claimSpeedUp = ads?.speedup;
+    const infoAds = await adsClass.getInfoAds(user);
+    if (infoAds?.show_for_speedup) {
+      const ads = await adsClass.viewAds(user, 1);
+      if (ads?.speedup) {
+        claimSpeedUp = ads?.speedup;
+      }
     }
+
     if (todayTapCount < maxTapCount) {
       user.log.log(colors.yellow(`Bắt đầu tap......`));
       while (todayTapCount < maxTapCount && count < 100) {
@@ -69,7 +73,10 @@ class TapService {
           claimSpeedUp
         )} speedup`
       );
-      await adsClass.viewAds(user, 0);
+      const infoAdsTap = await adsClass.getInfoAds(user);
+      if (infoAdsTap?.show_for_peels) {
+        await adsClass.viewAds(user, 0);
+      }
     } else {
       user.log.log(colors.magenta(`Đã tap hết số lượt của hôm nay`));
     }
