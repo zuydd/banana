@@ -7,6 +7,9 @@
 <a href="https://www.facebook.com/zuy.dd"><img src="https://raw.githubusercontent.com/zuydd/image/main/facebook.svg" alt="Facebook"></a>
 <a href="https://t.me/zuydd"><img src="https://raw.githubusercontent.com/zuydd/image/main/telegram.svg" alt="Telegram"></a>
 
+> [!CAUTION]
+> Bên game họ bật cloudflare chặn bot truy cập nên request từ tool đến server đang bị lỗi 429, tạm thời vẫn chưa tìm được cách khắc phục, trên các hội nhóm có share tool chạy bằng python ae có thể kham khảo sử dụng tạm nhưng nhớ rằng các tool đấy vẫn chưa chạy được với proxy vì lắp proxy vô là lại ăn chặn 429 nên cân nhắc không log nhiều acc vào tránh bị quét. Khi nào tìm được giải pháp khắc phục được và đảm bào an toàn mình sẽ thông báo tới mọi người. Cảm ơn mọi người đã ủng hộ tool trong thời gian qua 🥰
+
 > [!WARNING]
 > Mọi hành vi buôn bán tool dưới bất cứ hình thức nào đều không được cho phép!
 
@@ -86,8 +89,6 @@
 </details>
 
 ## 🎁 Donate
-
-🌟 Kêu gọi ủng hộ 🌟
 
 Chúng tôi rất vui được chia sẻ các mã script và tài nguyên mã nguồn miễn phí đến cộng đồng làm airdrop. Nếu bạn thấy các công cụ và tài liệu của chúng tôi hữu ích và muốn ủng hộ chúng tôi tiếp tục phát triển và duy trì các dự án này, bạn có thể đóng góp hỗ trợ qua hình thức donate.
 
