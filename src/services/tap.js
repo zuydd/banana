@@ -65,7 +65,7 @@ class TapService {
         if (!tapResponse) return;
         if (tapResponse.speedup > 0) claimSpeedUp++;
         todayTapCount += tapResponse.peel;
-        await delayHelper.delay(0.2);
+        await delayHelper.delay(3);
         count++;
       }
       user.log.log(

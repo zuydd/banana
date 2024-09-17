@@ -9,7 +9,7 @@ class QuestService {
       const { data } = await user.http.get("get_quest_list");
       if (data.code === 0) {
         const dataResponse = data.data;
-        const skipQuestList = [1, 2, 11, 35, 31, 82, 77, 56, 57, 81];
+        const skipQuestList = [1, 2, 11, 35, 31, 82, 77, 56, 57, 81, 101, 102];
         const quests = dataResponse.quest_list.filter(
           (quest) =>
             !skipQuestList.includes(quest.quest_id) &&
