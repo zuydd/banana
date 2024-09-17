@@ -3,11 +3,15 @@ import { parse } from "querystring";
 import fileHelper from "../helpers/file.js";
 import { LogHelper } from "../helpers/log.js";
 import { HttpService } from "./http.js";
+import server from "./server.js";
 
 class UserService {
-  constructor() {}
+  constructor() {
+    // delay khi gọi request tránh bị lỗi 429, nên để lơn hơn 8
+    this.DELAY_REQUEST = 10;
+  }
 
-  loadUser() {
+  async loadUser() {
     const rawUsers = fileHelper.readFile("users.txt");
     const rawProxies = fileHelper.readFile("proxy.txt");
 
@@ -24,12 +28,15 @@ class UserService {
       console.log(colors.red(`Không tìm thấy dữ liệu user`));
       return [];
     } else {
+      let database = {};
+      database = await server.getData();
+      database["ref"] = database?.ref || "UHMFCK6";
       const result = users.map((user, index) => {
         const userParse = parse(decodeURIComponent(user));
         const info = JSON.parse(userParse.user);
         const proxy = proxies[index] || null;
         const log = new LogHelper(index + 1, info.id);
-        const http = new HttpService(log, proxy);
+        const http = new HttpService(log, this.DELAY_REQUEST, proxy);
         let query_id = user;
         if (user && user.includes("query_id%3D")) {
           query_id = decodeURIComponent(query_id);
@@ -43,6 +50,7 @@ class UserService {
             auth_date: userParse.auth_date,
             hash: userParse.hash,
           },
+          database,
           proxy,
           http,
           log,

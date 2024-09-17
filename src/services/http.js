@@ -1,13 +1,16 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import { HttpsProxyAgent } from "https-proxy-agent";
+import UserAgent from "user-agents";
 import delayHelper from "../helpers/delay.js";
 
 export class HttpService {
-  constructor(log, proxy = null) {
+  constructor(log, delay, proxy = null) {
     this.baseURL = "https://interface.carv.io/banana/";
     this.proxy = proxy;
     this.log = log;
     this.token = null;
+    this.delay = delay;
     this.headers = {
       "Content-Type": "application/json",
       Accept: "application/json, text/plain, */*",
@@ -17,8 +20,7 @@ export class HttpService {
       "Sec-Fetch-Mode": "cors",
       Host: "interface.carv.io",
       Origin: "https://banana.carv.io",
-      "User-Agent":
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+      "User-Agent": new UserAgent({ deviceCategory: "mobile" }),
       Referer: "https://banana.carv.io/",
       Connection: "keep-alive",
       "Sec-Fetch-Dest": "empty",
@@ -37,6 +39,7 @@ export class HttpService {
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
+    headers["request-time"] = dayjs().unix() * 100;
     const config = {
       headers,
     };
@@ -49,21 +52,16 @@ export class HttpService {
   async get(endPoint) {
     const url = this.baseURL + endPoint;
     const config = this.initConfig();
-    await delayHelper.delay(5);
+    await delayHelper.delay(this.delay);
     return axios.get(url, config);
   }
 
   async post(endPoint, body) {
     const url = this.baseURL + endPoint;
     const config = this.initConfig();
-    await delayHelper.delay(5);
-    return axios.post(url, body, config);
-  }
+    await delayHelper.delay(this.delay);
 
-  put(endPoint, body) {
-    const url = this.baseURL + endPoint;
-    const config = this.initConfig();
-    return axios.put(url, body, config);
+    return axios.post(url, body, config);
   }
 
   async checkProxyIP() {

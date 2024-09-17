@@ -7,9 +7,6 @@
 <a href="https://www.facebook.com/zuy.dd"><img src="https://raw.githubusercontent.com/zuydd/image/main/facebook.svg" alt="Facebook"></a>
 <a href="https://t.me/zuydd"><img src="https://raw.githubusercontent.com/zuydd/image/main/telegram.svg" alt="Telegram"></a>
 
-> [!CAUTION]
-> Bên game họ bật cloudflare chặn bot truy cập nên request từ tool đến server đang bị lỗi 429, tạm thời vẫn chưa tìm được cách khắc phục, trên các hội nhóm có share tool chạy bằng python ae có thể kham khảo sử dụng tạm nhưng nhớ rằng các tool đấy vẫn chưa chạy được với proxy vì lắp proxy vô là lại ăn chặn 429 nên cân nhắc không log nhiều acc vào tránh bị quét. Khi nào tìm được giải pháp khắc phục được và đảm bào an toàn mình sẽ thông báo tới mọi người. Cảm ơn mọi người đã ủng hộ tool trong thời gian qua 🥰
-
 > [!WARNING]
 > Mọi hành vi buôn bán tool dưới bất cứ hình thức nào đều không được cho phép!
 
@@ -20,6 +17,16 @@
 - Bước 1: Tải về phiên bản mới nhất của tool [tại đây ⬇️](https://github.com/zuydd/banana/archive/refs/heads/main.zip)
 - Bước 2: Giải nén tool
 - Bước 3: Tại thư mục tool vừa giải nén, chạy lệnh `npm install` để cài đặt các thư viện bổ trợ
+
+> [!CAUTION]
+> PHẢI ĐỌC TRƯỚC KHI DÙNG
+> Game họ bật cloudflare hạn chế bot nên không thể request quá nhanh, nếu chạy nhanh IP sẽ bị ban 6-12h dẫn đến lỗi 429. Vậy nên đừng ông nào hỏi sao tool chạy chậm thế
+> Vui lòng sử dụng proxy sạch chưa bị cloudflare ban 429 để chạy tool, nếu proxy đang bị ban, vui lòng chờ chạy sau 8-12h
+> Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều requets
+> Tool vẫn có thể chạy đa luồng nhưng trong cùng một lúc sẽ không có 2 luồng cùng chạy một proxy, vì thế nên sắp xếp proxy xen kẽ nhau để tối ưu tốc độ, đừng sắp xếp các proxy giống nhau nằm gần nhau
+> Nếu gặp lỗi 429, bạn có thể thay proxy khác hoặc chờ tool thử lại sau 8 giờ, bạn có thể thay đổi thời gian thử lại bằng cách tìm biến `TIME_RETRY_429 = 480`
+> Bản cập nhật này chỉ hạn chế bị lỗi 429, không thể giải quyết triệt để 100% vậy nên vẫn có tỷ lệ nhỏ bị lỗi, chúng tôi đã cố gắng hết sức 😥😥
+> Và cuối cùng: chạy chậm còn hơn không chạy được vậy nên đừng phàn nàn nhé
 
 ## 💾 Cách thêm dữ liệu tài khoản
 
@@ -60,12 +67,31 @@
 - Thống kê danh sách tài khoản có chứa chuối có giá trị cao (mặc định >= 0.05 USDT). Tìm biến `PRICE_MIN = 0.05` thay 0.05 thành số thích hợp
 - Bán chuối hàng loạt
 - Tự động chuyển đổi định dạng query_id, encode hay decode vứt vô chạy láng hết, chứ nhìn mấy ông lấy cái query_id khổ cực quá 🤣
-- Mặc định ở vòng lặp đầu tiên mỗi tài khoản sẽ chạy cách nhau 6s để tránh spam request, có thể tìm biến `DELAY_ACC = 6` để điều chỉnh
+- đa luồng chạy bao nhiêu acc cũng được, không bị block lẫn nhau, lặp lại khi tới thời gian claim
+- hiển thị đếm ngược tới lần chạy tiếp theo, có thể tìm biến `IS_SHOW_COUNTDOWN = true` đổi thành `false` để tắt cho đỡ lag
+
+## ♾ Cài đặt đa luồng
+
+- Mặc định tool sẽ chạy đa luồng ứng với số tài khoản bạn nhập vào, không cần cài đặt thêm gì cả.
+- Mặc định ở vòng lặp đầu tiên mỗi tài khoản (luồng) sẽ chạy cách nhau 30s để tránh spam request, có thể tìm biến `DELAY_ACC = 30` trong file [index.js](src/run/index.js) để điều chỉnh cho phù hợp
+
+## ❌ Chế độ thử lại khi lỗi
+
+- Đỗi với lỗi kết nối proxy, hệ thống sẽ cố thử lại sau mỗi 30s, bạn có thể cài đặt giới hạn số lần thử lại bằng cách tìm biến `MAX_RETRY_PROXY = 20` trong file [index.js](src/run/index.js) để điều chỉnh cho phù hợp (mặc định là 20). Khi quá số lần thử kết nối lại hệ thống sẽ dừng auto tài khoản đó và nghi nhận lỗi vào file [log.error.txt](src/data/log.error.txt)
+- Đỗi với lỗi đăng nhập thất bại, hệ thống sẽ cố thử lại sau mỗi 60s, bạn có thể cài đặt giới hạn số lần thử lại bằng cách tìm biến `MAX_RETRY_LOGIN = 20` trong file [index.js](src/run/index.js) để điều chỉnh cho phù hợp (mặc định là 20). Khi quá số lần thử đăng nhập lại hệ thống sẽ dừng auto tài khoản đó và nghi nhận lỗi vào file [log.error.txt](src/data/log.error.txt)
 
 ## 🔄 Lịch sử cập nhật
 
-> Phiên bản mới nhất: `v0.0.5`
+> Phiên bản mới nhất: `v0.0.6`
 
+<details>
+<summary>v0.0.6 - 📅 17/09/2024</summary>
+  
+- Thêm cơ chế delay request và hàng chờ proxy để hạn chế bị lỗi 429
+- Thêm xem quảng cáo nhận thưởng khi mở chuối
+- Thêm thông báo từ hệ thống và kiểm tra version
+- Thêm đếm ngược đến lần chạy tiếp theo
+</details>
 <details>
 <summary>v0.0.5 - 📅 11/09/2024</summary>
   

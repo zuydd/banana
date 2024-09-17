@@ -1,7 +1,7 @@
 {
-  "name": "auto_okx",
-  "version": "1.0.0",
-  "description": "Tool tự động làm airdrop GM.ai",
+  "name": "auto_banana",
+  "version": "0.0.6",
+  "description": "Tool tự động làm airdrop Banana",
   "type": "module",
   "main": "src/run/index.js",
   "scripts": {
@@ -19,6 +19,7 @@
     "dayjs": "^1.11.12",
     "https-proxy-agent": "^7.0.5",
     "inquirer": "^10.1.8",
+    "user-agents": "^1.1.325",
     "ws": "^8.18.0",
     "yargs": "^17.7.2"
   },

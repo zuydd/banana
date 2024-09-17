@@ -2,6 +2,7 @@ import colors from "colors";
 import dayjs from "dayjs";
 import bananaHelper from "../helpers/banana.js";
 import fileHelper from "../helpers/file.js";
+import adsClass from "./ads.js";
 
 export class LotteryService {
   constructor() {
@@ -61,6 +62,8 @@ export class LotteryService {
           )}] Nhận được chuối xịn: ${rawInfo}`;
           fileHelper.writeLog("log.txt", dataLog);
         }
+        // Xem quảng cáo
+        await adsClass.viewAds(user, 2);
         // Share chuối
         await this.share(user, dataResponse.banana_id);
         return true;

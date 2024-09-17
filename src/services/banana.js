@@ -1,10 +1,9 @@
 // import colors from "colors";
 // import bananaHelper from "../helpers/banana.js";
-// import delayHelper from "../helpers/delay.js";
-
 import colors from "colors";
 import inquirer from "inquirer";
 import bananaHelper from "../helpers/banana.js";
+import delayHelper from "../helpers/delay.js";
 
 export class BananaService {
   constructor() {}
@@ -74,6 +73,7 @@ export class BananaService {
       sellCount,
     };
     try {
+      await delayHelper.delay(2);
       const { data } = await user.http.post("do_sell", body);
       if (data.code === 0) {
         const dataResponse = data.data;
@@ -123,7 +123,9 @@ export class BananaService {
     const indexCurrent = bananas.findIndex(
       (banana) => banana.banana_id === currentBanana.banana_id
     );
-    bananas[indexCurrent].count = bananas[indexCurrent].count - 1;
+    if (indexCurrent !== -1) {
+      bananas[indexCurrent].count = bananas[indexCurrent].count - 1;
+    }
 
     let result = [];
     switch (mode) {
@@ -167,6 +169,11 @@ export class BananaService {
     };
     let countBanana = 0;
     for (const banana of bananaSellList) {
+      user.log.log(
+        `Đang bán chuối, đã bán xong: ${colors.yellow(
+          countBanana + "/" + bananaSellList.length
+        )}`
+      );
       if (banana.count === 0) continue;
       if (banana.banana_id === 1) continue;
       const data = await this.sell(user, banana.banana_id, banana.count);
