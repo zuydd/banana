@@ -19,14 +19,16 @@
 - Bước 3: Tại thư mục tool vừa giải nén, chạy lệnh `npm install` để cài đặt các thư viện bổ trợ
 
 > [!CAUTION]
-> PHẢI ĐỌC TRƯỚC KHI DÙNG
-> Game họ bật cloudflare hạn chế bot nên không thể request quá nhanh, nếu chạy nhanh IP sẽ bị ban 6-12h dẫn đến lỗi 429. Vậy nên đừng ông nào hỏi sao tool chạy chậm thế
-> Vui lòng sử dụng proxy sạch chưa bị cloudflare ban 429 để chạy tool, nếu proxy đang bị ban, vui lòng chờ chạy sau 8-12h
-> Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều requets
-> Tool vẫn có thể chạy đa luồng nhưng trong cùng một lúc sẽ không có 2 luồng cùng chạy một proxy, vì thế nên sắp xếp proxy xen kẽ nhau để tối ưu tốc độ, đừng sắp xếp các proxy giống nhau nằm gần nhau
-> Nếu gặp lỗi 429, bạn có thể thay proxy khác hoặc chờ tool thử lại sau 8 giờ, bạn có thể thay đổi thời gian thử lại bằng cách tìm biến `TIME_RETRY_429 = 480`
-> Bản cập nhật này chỉ hạn chế bị lỗi 429, không thể giải quyết triệt để 100% vậy nên vẫn có tỷ lệ nhỏ bị lỗi, chúng tôi đã cố gắng hết sức 😥😥
-> Và cuối cùng: chạy chậm còn hơn không chạy được vậy nên đừng phàn nàn nhé
+>
+> - PHẢI ĐỌC TRƯỚC KHI DÙNG
+> - Game họ bật cloudflare hạn chế bot nên không thể request quá nhanh, nếu chạy nhanh IP sẽ bị ban 6-12h dẫn đến lỗi 429. Vậy nên đừng ông nào hỏi sao tool chạy chậm thế
+> - Vui lòng sử dụng proxy sạch chưa bị cloudflare ban 429 để chạy tool, nếu proxy đang bị ban, vui lòng chờ chạy sau 8-12h
+> - Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều requets
+> - Tool vẫn có thể chạy đa luồng nhưng trong cùng một lúc sẽ không có 2 luồng cùng chạy một proxy, vì thế nên sắp xếp proxy xen kẽ nhau để tối ưu tốc độ, đừng sắp xếp các proxy giống nhau nằm gần nhau
+> - Nếu bạn không chạy proxy tool sẽ chạy lần lượt các tài khoản (không đa luồng)
+> - Nếu gặp lỗi 429, bạn có thể thay proxy khác hoặc chờ tool thử lại sau 8 giờ, bạn có thể thay đổi thời gian thử lại bằng cách tìm biến `TIME_RETRY_429 = 480`
+> - Bản cập nhật này chỉ hạn chế bị lỗi 429, không thể giải quyết triệt để 100% vậy nên vẫn có tỷ lệ nhỏ bị lỗi, chúng tôi đã cố gắng hết sức 😥😥
+> - Và cuối cùng: chạy chậm còn hơn không chạy được vậy nên đừng phàn nàn nhé
 
 ## 💾 Cách thêm dữ liệu tài khoản
 
