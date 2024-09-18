@@ -2,7 +2,7 @@ class IPClass {
   constructor() {}
 
   getIP(proxy) {
-    if (proxy === "" || proxy === "skip") {
+    if (proxy === "" || proxy === "skip" || proxy === null) {
       return "local";
     }
     let ip = proxy.split("@")[1];

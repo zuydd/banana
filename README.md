@@ -20,10 +20,10 @@
 
 > [!CAUTION]
 >
-> - PHẢI ĐỌC TRƯỚC KHI DÙNG
+> - ⚠⚠⚠ PHẢI ĐỌC TRƯỚC KHI DÙNG ⚠⚠⚠
 > - Game họ bật cloudflare hạn chế bot nên không thể request quá nhanh, nếu chạy nhanh IP sẽ bị ban 6-12h dẫn đến lỗi 429. Vậy nên đừng ông nào hỏi sao tool chạy chậm thế
 > - Vui lòng sử dụng proxy sạch chưa bị cloudflare ban 429 để chạy tool, nếu proxy đang bị ban, vui lòng chờ chạy sau 8-12h
-> - Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều requets
+> - Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều request
 > - Tool vẫn có thể chạy đa luồng nhưng trong cùng một lúc sẽ không có 2 luồng cùng chạy một proxy, vì thế nên sắp xếp proxy xen kẽ nhau để tối ưu tốc độ, đừng sắp xếp các proxy giống nhau nằm gần nhau
 > - Nếu bạn không chạy proxy tool sẽ chạy lần lượt các tài khoản (không đa luồng)
 > - Nếu gặp lỗi 429, bạn có thể thay proxy khác hoặc chờ tool thử lại sau 8 giờ, bạn có thể thay đổi thời gian thử lại bằng cách tìm biến `TIME_RETRY_429 = 480`
@@ -32,17 +32,17 @@
 
 ## 💾 Cách thêm dữ liệu tài khoản
 
-> Tool sử dụng `query_id` làm dữ liệu đầu vào cho mỗi tài khoản
+> Tool sử dụng `query_id=` hoặc `user=` làm dữ liệu đầu vào cho mỗi tài khoản
 
 > Tất cả dữ liệu mà bạn cần nhập đều nằm ở các file trong thư mục 📁 `src / data`
 
-- [users.txt](src/data/users.txt) : chứa danh sách `query_id` của các tài khoản, mỗi dòng ứng với một tài khoản
-- [proxy.txt](src/data/proxy.txt) : chứa danh sách proxy, proxy ở mỗi dòng sẽ ứng với tài khoản ở dòng đó trong file users.txt phía trên, để trống nếu không dùng proxy
-- [token.json](src/data/token.json) : chứa danh sách token được tạo ra từ `query_id`. Có thể copy token từ các tool khác qua file này (miễn cùng format) để chạy.
+- [users.txt](src/data/users.txt) : chứa danh sách `query_id` hoặc `user` của các tài khoản, mỗi dòng ứng với một tài khoản
+- [proxy.txt](src/data/proxy.txt) : chứa danh sách proxy, proxy ở mỗi dòng sẽ ứng với tài khoản ở dòng đó trong file users.txt phía trên, để trống nếu không dùng proxy. Nếu muốn 1 tài khoản nào đó không dùng proxy thì gõ vào chữ `skip` ở dòng ứng với tài khoản đó
+- [token.json](src/data/token.json) : chứa danh sách token được tạo ra từ `query_id` hoặc `user`. Có thể copy token từ các tool khác qua file này (miễn cùng format) để chạy.
 
 > Định dạng proxy: http://user:pass@ip:port
 
-> Lưu ý: Nếu nhận được thông báo đăng nhập thất bại, hãy lấy mới lại `query_id`
+> Lưu ý: Nếu nhận được thông báo đăng nhập thất bại, hãy lấy mới lại `query_id` hoặc `user`
 
 ## >\_ Các lệnh và chức năng tương ứng
 
@@ -84,8 +84,13 @@
 
 ## 🔄 Lịch sử cập nhật
 
-> Phiên bản mới nhất: `v0.0.6`
+> Phiên bản mới nhất: `v0.0.7`
 
+<details>
+<summary>v0.0.7 - 📅 18/09/2024</summary>
+  
+- Fix lỗi crash tool khi không nhập proxy
+</details>
 <details>
 <summary>v0.0.6 - 📅 17/09/2024</summary>
   

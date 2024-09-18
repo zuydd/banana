@@ -8,7 +8,7 @@ import bananaService from "../services/banana.js";
 import server from "../services/server.js";
 import userService from "../services/user.js";
 
-const VERSION = "v0.0.6";
+const VERSION = "v0.0.7";
 // Điều chỉnh khoảng cách thời gian chạy vòng lặp đầu tiên giữa các luồng tránh bị spam request (tính bằng giây)
 const DELAY_ACC = 30;
 // Đặt số lần thử kết nối lại tối đa khi proxy lỗi, nếu thử lại quá số lần cài đặt sẽ dừng chạy tài khoản đó và ghi lỗi vào file log
