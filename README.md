@@ -20,7 +20,7 @@
 
 > [!CAUTION]
 >
-> - ⚠⚠⚠ PHẢI ĐỌC TRƯỚC KHI DÙNG ⚠⚠⚠
+> - ❗❗❗ PHẢI ĐỌC TRƯỚC KHI DÙNG ❗❗❗
 > - Game họ bật cloudflare hạn chế bot nên không thể request quá nhanh, nếu chạy nhanh IP sẽ bị ban 6-12h dẫn đến lỗi 429. Vậy nên đừng ông nào hỏi sao tool chạy chậm thế
 > - Vui lòng sử dụng proxy sạch chưa bị cloudflare ban 429 để chạy tool, nếu proxy đang bị ban, vui lòng chờ chạy sau 8-12h
 > - Cơ chế tranh spam của tool sẽ delay mỗi request 10 giây, dẫn đến một số việc như tap sẽ lâu xong hơn do phải gọi nhiều request
