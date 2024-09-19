@@ -97,6 +97,7 @@ const run = async (user, index) => {
           "YYYY-MM-DDTHH:mm:ssZ[Z]"
         )}] Lỗi kết nối proxy - ${user.proxy}`;
         fileHelper.writeLog("log.error.txt", dataLog);
+        ips = ips.filter((currentIp) => currentIp !== ip);
         break;
       }
 
@@ -107,6 +108,7 @@ const run = async (user, index) => {
           "YYYY-MM-DDTHH:mm:ssZ[Z]"
         )}] Lỗi đăng nhập thất bại quá ${MAX_RETRY_LOGIN} lần`;
         fileHelper.writeLog("log.error.txt", dataLog);
+        ips = ips.filter((currentIp) => currentIp !== ip);
         break;
       }
     } catch (error) {
@@ -119,8 +121,8 @@ const run = async (user, index) => {
       countdownList[index].time = TIME_RETRY_429 * 60;
       countdownList[index].created = dayjs().unix();
       countdownList[index].running = false;
-      await delayHelper.delay(TIME_RETRY_429 * 60);
       ips = ips.filter((currentIp) => currentIp !== ip);
+      await delayHelper.delay(TIME_RETRY_429 * 60);
       continue;
     }
     if (!login.status) {
