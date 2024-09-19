@@ -84,8 +84,13 @@
 
 ## 🔄 Lịch sử cập nhật
 
-> Phiên bản mới nhất: `v0.0.7`
+> Phiên bản mới nhất: `v0.0.8`
 
+<details>
+<summary>v0.0.8 - 📅 19/09/2024</summary>
+  
+- Fix lỗi mở khoá proxy trước khi chờ sử lý lại lỗi 429 để các luồng dùng proxy đó phía sau không bị chặn
+</details>
 <details>
 <summary>v0.0.7 - 📅 18/09/2024</summary>
   

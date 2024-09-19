@@ -1,6 +1,6 @@
 {
   "name": "auto_banana",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Tool tự động làm airdrop Banana",
   "type": "module",
   "main": "src/run/index.js",
