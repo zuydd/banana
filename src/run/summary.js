@@ -10,7 +10,7 @@ import bananaService from "../services/banana.js";
 import server from "../services/server.js";
 import userService from "../services/user.js";
 
-const VERSION = "v0.0.8";
+const VERSION = "v0.0.9";
 // Đặt số lần thử kết nối lại tối đa khi proxy lỗi, nếu thử lại quá số lần cài đặt sẽ dừng chạy tài khoản đó và ghi lỗi vào file log
 const MAX_RETRY_PROXY = 20;
 // Đặt số lần thử đăng nhập tối đa khi đăng nhập lỗi, nếu thử lại quá số lần cài đặt sẽ dừng chạy tài khoản đó và ghi lỗi vào file log
