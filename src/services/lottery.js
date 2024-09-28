@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import bananaHelper from "../helpers/banana.js";
 import fileHelper from "../helpers/file.js";
 import adsClass from "./ads.js";
+import bananaService from "./banana.js";
 
 export class LotteryService {
   constructor() {
@@ -48,13 +49,13 @@ export class LotteryService {
     try {
       const { data } = await user.http.post("do_lottery", body);
       if (data.code === 0) {
-        const dataResponse = data.data;
+        const dataResponse = data.data?.banana_info;
         const bananaInfo = bananaHelper.getInfo(dataResponse);
         user.log.log(`Harvest thành công, nhận được chuối: ${bananaInfo}`);
         // Ghi log nếu chuối có giá trị cao
         const PRICE_LOG = 0.05;
         if (dataResponse.sell_exchange_usdt >= PRICE_LOG) {
-          const rawInfo = `${dataResponse.name} [${dataResponse.banana_id}] Sản lượng: ${dataResponse.daily_peel_limit} 🍌/ngày - Giá bán: ${dataResponse.sell_exchange_peel} 🍌 + ${dataResponse.sell_exchange_usdt} USDT 💵`;
+          const rawInfo = `${dataResponse?.name} [${dataResponse?.banana_id}] Sản lượng: ${dataResponse?.daily_peel_limit} 🍌/ngày - Giá bán: ${dataResponse?.sell_exchange_peel} 🍌 + ${dataResponse?.sell_exchange_usdt} USDT 💵`;
           const dataLog = `[No ${user.index} _ ID: ${
             user.info.id
           } _ Time: ${dayjs().format(
@@ -65,7 +66,9 @@ export class LotteryService {
         // Xem quảng cáo
         await adsClass.viewAds(user, 2);
         // Share chuối
-        await this.share(user, dataResponse.banana_id);
+        await this.share(user, dataResponse?.banana_id);
+        // Đổi chuối
+        await bananaService.handleEquip(user, dataResponse);
         return true;
       } else {
         throw new Error(`Harvest thất bại: ${data.msg}`);

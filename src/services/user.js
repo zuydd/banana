@@ -54,6 +54,7 @@ class UserService {
           proxy,
           http,
           log,
+          banana_info: null,
         };
       });
       return result;

@@ -10,12 +10,24 @@ export class BananaService {
 
   async getBananaList(user) {
     try {
-      const { data } = await user.http.get("get_banana_list");
+      let bananaOwned = [];
+      const { data } = await user.http.get(
+        "get_banana_list/v2?page_num=1&page_size=20"
+      );
       if (data.code === 0) {
         const dataResponse = data.data;
-        let bananas = dataResponse.banana_list.filter(
-          (banana) => banana.count > 0
-        );
+        bananaOwned = bananaOwned.concat(dataResponse.list);
+        const totalPage = Math.ceil(dataResponse.owned / 20);
+        for (let currentPage = 2; currentPage <= totalPage; currentPage++) {
+          const { data } = await user.http.get(
+            `get_banana_list/v2?page_num=${currentPage}&page_size=20`
+          );
+          if (data.code === 0) {
+            bananaOwned = bananaOwned.concat(data.data.list);
+          }
+        }
+
+        let bananas = bananaOwned.filter((banana) => banana.count > 0);
         bananas = bananas.sort((a, b) => {
           // So sánh theo daily_peel_limit trước
           if (b.daily_peel_limit !== a.daily_peel_limit) {
@@ -55,13 +67,29 @@ export class BananaService {
     }
   }
 
-  async handleEquip(user, currentBananaId) {
-    const bananas = await this.getBananaList(user);
-    if (!bananas.length) return;
-    if (currentBananaId !== bananas[0].banana_id) {
-      const statusEquip = await this.equip(user, bananas[0].banana_id);
+  async checkHaveChange(user, newBanana) {
+    if (!user.banana_info) return false;
+    if (newBanana?.daily_peel_limit !== user.banana_info?.daily_peel_limit) {
+      return newBanana?.daily_peel_limit > user.banana_info?.daily_peel_limit;
+    }
+    // Nếu daily_peel_limit bằng nhau, so sánh theo sell_exchange_usdt
+    if (
+      newBanana?.sell_exchange_usdt !== user.banana_info?.sell_exchange_usdt
+    ) {
+      return (
+        newBanana?.sell_exchange_usdt > user.banana_info?.sell_exchange_usdt
+      );
+    }
+    // Nếu cả daily_peel_limit và sell_exchange_usdt bằng nhau, so sánh theo sell_exchange_peel
+    return newBanana?.sell_exchange_peel > user.banana_info?.sell_exchange_peel;
+  }
+
+  async handleEquip(user, newBanana) {
+    const haveChange = this.checkHaveChange(user, newBanana);
+    if (user?.banana_info?.banana_id !== newBanana.banana_id && haveChange) {
+      const statusEquip = await this.equip(user, newBanana?.banana_id);
       if (statusEquip) {
-        const bananaInfo = bananaHelper.getInfo(bananas[0]);
+        const bananaInfo = bananaHelper.getInfo(newBanana);
         user.log.log(`Đổi chuối xịn hơn: ${bananaInfo}`);
       }
     }

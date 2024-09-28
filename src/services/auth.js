@@ -104,6 +104,7 @@ class AuthService {
     }
     if (profile) {
       const equip_banana = profile?.equip_banana;
+      user.banana_info = equip_banana;
       const peels = `Peels: ${profile?.peel} 🍌`;
       const usdt = `USDT: ${profile?.usdt} 💵`;
       const bananaInfo = bananaHelper.getInfo(equip_banana);

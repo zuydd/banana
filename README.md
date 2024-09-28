@@ -84,8 +84,15 @@
 
 ## 🔄 Lịch sử cập nhật
 
-> Phiên bản mới nhất: `v0.0.8`
+> Phiên bản mới nhất: `v0.0.9`
 
+<details>
+<summary>v0.0.9 - 📅 28/09/2024</summary>
+  
+- Fix lỗi không làm nhiệm vụ, không claim chuối khi hoàn thành 3 nhiệm vụ
+- Fix lỗi lấy danh sách chuối (đã có thể bán và thống kê chuối)
+- Fix lỗi chia sẽ chuối sau khi harvest
+</details>
 <details>
 <summary>v0.0.8 - 📅 19/09/2024</summary>
   

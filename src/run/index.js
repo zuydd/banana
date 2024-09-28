@@ -6,7 +6,6 @@ import fileHelper from "../helpers/file.js";
 import generatorHelper from "../helpers/generator.js";
 import ipClass from "../helpers/ip.js";
 import authService from "../services/auth.js";
-import bananaService from "../services/banana.js";
 import { LotteryService } from "../services/lottery.js";
 import questService from "../services/quest.js";
 import server from "../services/server.js";
@@ -138,12 +137,12 @@ const run = async (user, index) => {
     await questService.handleQuest(user, quests, progress);
     const lotteryService = new LotteryService();
     await lotteryService.handleLottery(user);
-    await bananaService.handleEquip(user, login?.profile.equip_banana_id);
+    // await bananaService.handleEquip(user, login?.profile?.equip_banana_id);
     const speedupCount = await tapService.handleTap(
       user,
-      login?.profile.max_click_count,
-      login?.profile.today_click_count,
-      login?.profile.speedup_count
+      login?.profile?.max_click_count,
+      login?.profile?.today_click_count,
+      login?.profile?.speedup_count
     );
     const awaitTime = await tapService.handleSpeedUp(user, speedupCount);
     user.log.log(

@@ -6,13 +6,15 @@ class QuestService {
 
   async getQuestList(user) {
     try {
-      const { data } = await user.http.get("get_quest_list");
+      const { data } = await user.http.get(
+        "get_quest_list/v2?page_num=1&page_size=50"
+      );
       if (data.code === 0) {
         const dataResponse = data.data;
         const skipQuestList = user?.database?.skipErrorTasks || [
           1, 2, 11, 35, 31, 82, 77, 56, 57, 81, 101, 102, 106,
         ];
-        const quests = dataResponse.quest_list.filter(
+        const quests = dataResponse.list.filter(
           (quest) =>
             !skipQuestList.includes(quest.quest_id) &&
             (!quest.is_achieved || !quest.is_claimed)
@@ -35,10 +37,17 @@ class QuestService {
   }
 
   async handleQuest(user, quests, progress) {
-    if (quests.length === 0) return;
-    user.log.log(`Số nhiệm vụ chưa hoàn thành: ${colors.green(quests.length)}`);
-    if (progress === 3) {
-      await this.claimQuestLottery(user);
+    if (quests.length > 0) {
+      user.log.log(
+        `Số nhiệm vụ chưa hoàn thành: ${colors.green(quests.length)}`
+      );
+    }
+
+    if (progress >= 3) {
+      const countClaim = Math.floor(progress / 3);
+      for (let index = 0; index < countClaim; index++) {
+        await this.claimQuestLottery(user);
+      }
     }
     for (const quest of quests) {
       const statusAchieve = await this.achieveQuest(user, quest);
